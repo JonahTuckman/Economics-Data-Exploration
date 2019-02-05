@@ -27,7 +27,7 @@ images_dir <- '/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/
 
 library(tidyverse)
 install.packages('tidyverse')
-install.packages(('dplyr'))
+install.packages('dplyr')
 
 dataset <- read.csv('RawData/DataSet1_AgricFarmVal.csv')
 
@@ -44,5 +44,6 @@ plot(x = countydata$YEAR, y = countydata$FAVAL)
 abline(lm(y ~ x, data = countydata), col = 'blue')
 
 cpiData <- read.csv('RawData/AnnualCPI_1800_2017.csv')
-countydata2 <- left_join(x = countydata, y = cpiData, by = c('YEAR' = 'Year'))
+countydata2 <- left_join(countydata, cpiData, by = c('YEAR' = 'Year'))
 help('left_join')
+
