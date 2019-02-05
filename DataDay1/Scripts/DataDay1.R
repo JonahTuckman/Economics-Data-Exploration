@@ -28,6 +28,7 @@ images_dir <- '/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/
 library(tidyverse)
 install.packages('tidyverse')
 install.packages('dplyr')
+library(dplyr)
 
 dataset <- read.csv('RawData/DataSet1_AgricFarmVal.csv')
 
