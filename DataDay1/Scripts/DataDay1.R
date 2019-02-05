@@ -45,5 +45,3 @@ abline(lm(y ~ x, data = countydata), col = 'blue')
 
 cpiData <- read.csv('RawData/AnnualCPI_1800_2017.csv')
 countydata2 <- left_join(countydata, cpiData, by = c('YEAR' = 'Year'))
-help('left_join')
-
