@@ -92,15 +92,15 @@ y = y.reshape(len(y), 1)
 
 plt.scatter(county_data['YEAR'], county_data['FAVAL'], c = 'RED')
 
-x_train = x[:39335]
-x_train = np.nan_to_num(x_train)
-np.isnan(x_train).sum()
+x_train = x[:39335] # Creating x variable train set of first 80%
+x_train = np.nan_to_num(x_train) # removing nan 
+np.isnan(x_train).sum() # checking if there are any nan
 
-x_test = x[39335:]
-x_test = np.nan_to_num(x_test)
-np.isnan(x_test).sum()
+x_test = x[39335:] # creating x variable test set for last 20%
+x_test = np.nan_to_num(x_test) # removing nan
+np.isnan(x_test).sum() # checking if there are nan
 
-y_train = y[:39335]
+y_train = y[:39335] # creating y variable to train on first 80%
 y_train = np.nan_to_num(y_train)
 np.isnan(y_train).sum()
 
@@ -122,3 +122,7 @@ plt.plot(x_test, prediction, color = 'RED', linewidth = 3)
 plt.show()
 
 CPI_Data = pd.read_csv('RawData/AnnualCPI_1800_2017.csv')
+
+
+frames = [county_data, CPI_Data]
+county_data2 = pd.concat(frames) ## This is not correct
