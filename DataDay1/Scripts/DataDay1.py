@@ -122,7 +122,8 @@ plt.plot(x_test, prediction, color = 'RED', linewidth = 3)
 plt.show()
 
 CPI_Data = pd.read_csv('RawData/AnnualCPI_1800_2017.csv')
+CPI_Data.columns = ['YEAR','Annual Average']
 
-
-frames = [county_data, CPI_Data]
+frames = [county_data, CPI_Data] ## 
 county_data2 = pd.concat(frames) ## This is not correct
+county_data2 = county_data.join(CPI_Data, on = 'YEAR')
