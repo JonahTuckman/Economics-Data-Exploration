@@ -111,6 +111,8 @@ np.isnan(y_test).sum()
 regression = linear_model.LinearRegression()
 regression.fit(x_train, y_train)
 prediction = regression.predict(x_test)
+predict_point = regression.predict([[1980]])
+
 
 plt.scatter(x_test, y_test, color = 'BLACK')
 plt.title('Test Data Counties')
@@ -119,6 +121,7 @@ plt.ylabel('FAVAL')
 plt.xticks(())
 plt.yticks(())
 plt.plot(x_test, prediction, color = 'RED', linewidth = 3)
+plt.scatter(1980,predict_point)
 plt.show()
 
 CPI_Data = pd.read_csv('RawData/AnnualCPI_1800_2017.csv')
@@ -127,3 +130,4 @@ CPI_Data.columns = ['YEAR','Annual Average']
 frames = [county_data, CPI_Data] ## 
 county_data2 = pd.concat(frames) ## This is not correct
 county_data2 = county_data.join(CPI_Data, on = 'YEAR')
+
