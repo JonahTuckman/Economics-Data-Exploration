@@ -45,4 +45,5 @@ plot(x = countydata$YEAR, y = countydata$FAVAL)
 abline(lm(y ~ x, data = countydata), col = 'blue')
 
 cpiData <- read.csv('RawData/AnnualCPI_1800_2017.csv')
-countydata2 <- left_join(countydata, cpiData, by = c('YEAR' = 'Year'))
+countydata2 <- left_join(x = countydata,y = cpiData, by = c('YEAR' = 'Year'))
+write.csv(countydata2, file = 'MostRecentFile.csv')
