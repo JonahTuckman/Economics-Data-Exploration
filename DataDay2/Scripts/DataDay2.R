@@ -24,4 +24,21 @@ AgricCensus <- read.csv('RawData/AgricCensus_1870_1900.csv')
 # Overlaps with countydataSub with YEAR and FIPS
 combined2 <- left_join(x = countydataSub,y = AgricCensus, by = c('YEAR' = 'YEAR'), suffix = c('.x', '.y'))
 landSuit <- read.csv('RawData/suit_wheat.csv')
+# Overlapping Fips are landSuit$fips and combined2$FIPS.y
 farmval_production_suit = left_join(x = combined2, y = landSuit, by = c("FIPS.y" = "fips"))
+
+
+#What are the new variables in your dataset?
+#  To answer this one, I added a new codebook to the moodle page.
+### The new variables in our combined dataset are FIPS.y, TotalPopulation (TOTPOP), acres of improved farm land (ACIMP),
+### Cash value of farming machinery (EQUIPVAL), estimated value of all farm productions (FARMOUT),
+### Total number of farms (FARMS), suitable wheat (suit_wheat)
+
+
+#Are the values in real or nominal dollars?
+###
+# For the suitability measure, are larger numbers a sign of better land or worse land?
+###
+
+
+transform(farmval_production_suit, EQUIPVAL = )
