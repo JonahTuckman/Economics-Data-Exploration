@@ -9,4 +9,12 @@
 setwd('/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/ProblemSets/ProblemSet1')
 ## This line sets the working directory to the local path on my machine
 
-dataset <- read.csv('CountyRRData.csv')
+dataset <- read.csv('data/CountyRRData.csv')
+agrData <- read.csv('data/AgricCensus_1870_1900.csv')
+
+combinedDataSet = left_join(x = agrData, y = dataset, by = c("FIPS" = "fips"))
+
+# Question 1: What is a unit of observation in the data?
+### A unit of observation in the data is ??????
+
+
