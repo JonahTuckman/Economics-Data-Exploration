@@ -14,7 +14,11 @@ agrData <- read.csv('data/AgricCensus_1870_1900.csv')
 
 combinedDataSet = left_join(x = agrData, y = dataset, by = c("FIPS" = "fips"))
 
-# Question 1: What is a unit of observation in the data?
-### A unit of observation in the data is ??????
+## PART1 ##
 
+# Question 1: What is a unit of observation in the data?
+### A unit of observation in the data is kilometers in terms of rail road distance. 
+
+
+combinedDataSet[, 'RR?'] <- ifelse(combinedDataSet['RRinitialtotaldist'] == 0, 0, 1)
 
