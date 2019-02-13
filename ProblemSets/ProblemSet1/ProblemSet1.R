@@ -63,3 +63,30 @@ print(standardDevRRKM)
 
 ## Part 3: Scatterplots with Binary RR Treatment ## 
 X = combinedDataSet$YEAR
+Y = log(combinedDataSet$adjfarmval)
+
+# 1. Create a scatterplot with a local polynomial line for the ever RR group
+RRever = subset(combinedDataSet, `RR?` == 1)
+XEver = RRever$YEAR
+YEver = log(RRever$adjfarmval)
+plot(XEver, YEver)
+abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
+
+# 2. Create a scatterplot with a local polynomial line for the never RR group.
+RRnever = subset(combinedDataSet, `RR?` == 0)
+Xnever = RRnever$YEAR
+Ynever = log(RRnever$adjfarmval)
+plot(Xnever, Ynever)
+abline(lm(Ynever ~ Xnever, data = RRnever), col = 'blue')
+
+"3. Create a scatterplot with the entire dataset in one graph. This should have the points
+plotted in different colors and the lines in different colors. This is so we can start to see
+how different the two areas are."
+
+## Run together as a grouping. 
+plot(XEver, YEver,col = 'blue', xlab = 'X', ylab = 'Y', ylim = range(-10: 2))
+par(new = TRUE, yaxs = "i") # Adds both plots to the single graph
+plot(Xnever, Ynever, col = 'red', xlab = '', ylab = '', ylim = range(-10:2))
+abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
+abline(lm(Ynever ~ Xnever, data = RRnever), col = 'red')
+
