@@ -22,10 +22,10 @@ countydataSub <- subset(countydata, (YEAR >= 1870 & YEAR <= 1900))
 
 AgricCensus <- read.csv('RawData/AgricCensus_1870_1900.csv')
 # Overlaps with countydataSub with YEAR and FIPS
-combined2 <- left_join(x = countydataSub,y = AgricCensus, by = c('YEAR' = 'YEAR'), suffix = c('.x', '.y'))
+combined2 <- left_join(x = countydataSub,y = AgricCensus, by = c('FIPS' = 'FIPS', 'YEAR' = 'YEAR'))
 landSuit <- read.csv('RawData/suit_wheat.csv')
 # Overlapping Fips are landSuit$fips and combined2$FIPS.y
-farmval_production_suit = left_join(x = combined2, y = landSuit, by = c("FIPS.y" = "fips"))
+farmval_production_suit = left_join(x = combined2, y = landSuit, by = c("FIPS" = "fips"))
 
 
 #What are the new variables in your dataset?
@@ -40,5 +40,4 @@ farmval_production_suit = left_join(x = combined2, y = landSuit, by = c("FIPS.y"
 # For the suitability measure, are larger numbers a sign of better land or worse land?
 ###
 
-
-transform(farmval_production_suit, EQUIPVAL = )
+IAEquipVal = transform(farmval_production_suit$EQUIPVAL / (farmval_production_suit$Annual.Average / 100))
