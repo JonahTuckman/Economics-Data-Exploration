@@ -90,3 +90,28 @@ plot(Xnever, Ynever, col = 'red', xlab = '', ylab = '', ylim = range(-10:2))
 abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
 abline(lm(Ynever ~ Xnever, data = RRnever), col = 'red')
 
+# Part 4: Basic Difference – in – Difference (DID) Models
+
+#1. Generate a new variable, after, which is equal to 1 if the year>1885 and 0 if year<=1885.
+combinedDataSet[, '1985'] <- ifelse(combinedDataSet['YEAR'] > 1885, 1, 0)
+# 2. Generate the interaction term for the DID
+#### Railroads is interaction term (X), will run with different outcomes
+Xinter = combinedDataSet$`RR?`
+# Xinter2 = combinedDataSet$RRinitialtotaldist
+
+# 3. Run a standard DID model using adjusted farm values as the outcome
+YFarm = combinedDataSet$adjfarmval
+plot(Xinter, YFarm,
+     type = "p",
+     ylim = range(-1:3))
+abline(lm(YFarm ~ Xinter, data = combinedDataSet), col = 'red')
+
+# 4. Run a standard DID model using the natural log of adjusted farm values as the outcome
+YFarmLog = log(combinedDataSet$adjfarmval)
+plot(Xinter, YFarmLog,
+     type = "p",
+     ylim = range(-10:1))
+abline(lm(YFarmLog ~ Xinter, data = combinedDataSet), col = 'red')
+
+
+
