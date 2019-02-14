@@ -13,9 +13,15 @@ dataset <- read.csv('data/CountyRRData.csv')
 farmval <- read.csv('data/Dataset_1.1.csv')
 cpiData <- read.csv('data/AnnualCPI_1800_2017.csv')
 
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("dplyr")
+install.packages("ggplot2")
+
 combinedDataSet <- read.csv('data/DataDay1CountyData.csv')
-combinedDataSet <-transform(combinedDataSet, adjfarmval = (FAVAL/Annual.Average/100))
-combinedDataSet <- left_join(combinedDataSet, dataset, by = c("FIPS" = "fips"))
+combinedDataSet <- transform(combinedDataSet, adjfarmval = (FAVAL/Annual.Average/100))
+colnames(dataset) <- c("FIPS", "RRinitialtotaldist")
+combinedDataSet <- merge(combinedDataSet, dataset, by = "FIPS")
 
 ## PART 1:Dataset Construction ##
 
@@ -25,8 +31,10 @@ combinedDataSet <- left_join(combinedDataSet, dataset, by = c("FIPS" = "fips"))
 
 combinedDataSet[, 'RR?'] <- ifelse(combinedDataSet['RRinitialtotaldist'] == 0, 0, 1)
 combinedDataSet <- subset(combinedDataSet, (YEAR <= 1930))
+
 # Question 2: How many observations are in your dataset after this adjustment?
 ### 30,770
+
 # Question 3: How many missing land values do you have?
 summary(combinedDataSet, na.rm = TRUE)
 ### 5521 NA's
@@ -69,26 +77,39 @@ Y = log(combinedDataSet$adjfarmval)
 RRever = subset(combinedDataSet, `RR?` == 1)
 XEver = RRever$YEAR
 YEver = log(RRever$adjfarmval)
-plot(XEver, YEver)
-abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
+plotEver <- ggplot(data = RRever, mapping = aes(x = XEver,y = YEver)) + geom_point() + geom_smooth()
+plotEver
+
+# abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
 
 # 2. Create a scatterplot with a local polynomial line for the never RR group.
 RRnever = subset(combinedDataSet, `RR?` == 0)
 Xnever = RRnever$YEAR
 Ynever = log(RRnever$adjfarmval)
-plot(Xnever, Ynever)
-abline(lm(Ynever ~ Xnever, data = RRnever), col = 'blue')
+plotNever <- ggplot(data = RRnever, mapping = aes(x = Xnever, y = Ynever)) + geom_point() + geom_smooth()
+plotNever
+
+#abline(lm(Ynever ~ Xnever, data = RRnever), col = 'blue')
 
 "3. Create a scatterplot with the entire dataset in one graph. This should have the points
 plotted in different colors and the lines in different colors. This is so we can start to see
 how different the two areas are."
 
 ## Run together as a grouping. 
-plot(XEver, YEver,col = 'blue', xlab = 'X', ylab = 'Y', ylim = range(-10: 2))
-par(new = TRUE, yaxs = "i") # Adds both plots to the single graph
-plot(Xnever, Ynever, col = 'red', xlab = '', ylab = '', ylim = range(-10:2))
-abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
-abline(lm(Ynever ~ Xnever, data = RRnever), col = 'red')
+combinedDataSet$`RR?` <- as.factor(combinedDataSet$`RR?`)
+
+YCombined <- log(combinedDataSet$adjfarmval)
+plotCombined <- ggplot(data = combinedDataSet, aes(x = YEAR, y = YCombined,
+                                                   color = combinedDataSet$`RR?`,
+                                                   shape = combinedDataSet$`RR?`)) + geom_point() + geom_smooth()
+  
+plotCombined
+
+# plot(XEver, YEver,col = 'blue', xlab = 'X', ylab = 'Y', ylim = range(-10: 2))
+# par(new = TRUE, yaxs = "i") # Adds both plots to the single graph
+# plot(Xnever, Ynever, col = 'red', xlab = '', ylab = '', ylim = range(-10:2))
+# abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
+# abline(lm(Ynever ~ Xnever, data = RRnever), col = 'red')
 
 # Part 4: Basic Difference – in – Difference (DID) Models
 
