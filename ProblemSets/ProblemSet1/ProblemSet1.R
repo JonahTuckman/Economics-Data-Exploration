@@ -225,17 +225,25 @@ combinedDataSet$NewTotalDist = log(combinedDataSet$RRinitialtotaldist + 1)
 YAdjFarmVal = log(combinedDataSet$adjfarmval)
 XAdjFarmVal = combinedDataSet$RRinitialtotaldist
 
-plot1 <- ggplot(data = combinedDataSet, aes(x = XAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
-plot1
+AdjFarmVsRRTotDist <- ggplot(data = combinedDataSet, aes(x = XAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
+AdjFarmVsRRTotDist + ggtitle("Adjusted Farm Values vs Rail Road Initial Total Distance") + xlab("RR Initial Total Distance") + ylab("Adjusted Farm Values")
+dev.copy(png, "Adjusted Farm Values vs Rail Road Initial Total Distance")
+dev.off()
 
 # Y is same
 XNewAdjFarmVal = combinedDataSet$NewTotalDist
 
-plot2 <- ggplot(data = combinedDataSet, aes(x = XNewAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
-plot2
-
+AdjFarmvsNewDist <- ggplot(data = combinedDataSet, aes(x = XNewAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
+AdjFarmvsNewDist + ggtitle("Adjusted Farm Values vs Log of Rail Road Initial Total Distance + 1") + xlab("Log RR Initial Total Distance + 1") + ylab("Adjusted Farm Values")
+dev.copy(png, "Adjusted Farm Values vs Log of Rail Road Initial Total Distance + 1")
+dev.off()
 
 # Question 10: Describe the patterns in the two figures above.
+
+### In the initial plot, before adjusting our X value, there is a concentration of points primarily ranging from X = 0 -> X = 500.
+### When the change of our X value is made, there is still a concentration of points, but now they concentrate in the center
+### of the plot and around a much smaller range. In this they are in the center of the plot and primarily ranging from 
+### X = 2 -> X = 6.
 
 #################################################
 #Part 6: Run Simple Bivariate Regressions
