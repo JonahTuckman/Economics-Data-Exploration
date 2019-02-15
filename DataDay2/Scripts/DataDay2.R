@@ -16,6 +16,7 @@ images_dir <- '/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/
 
 library(tidyverse)
 install.packages('tidyverse')
+install.packages("dplyr")
 
 countydata <- read.csv('RawData/DataDay1CountyData.csv')
 countydataSub <- subset(countydata, (YEAR >= 1870 & YEAR <= 1900))
