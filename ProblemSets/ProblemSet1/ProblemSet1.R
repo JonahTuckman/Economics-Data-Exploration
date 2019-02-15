@@ -56,7 +56,6 @@ combinedDataSet <- subset(combinedDataSet, (YEAR <= 1930))
 nrow(combinedDataSet)
 ### Number of rows / number of observations: 30,770
 
-
 # Question 3: How many missing land values do you have?
 summary(combinedDataSet, na.rm = TRUE)
 ### 5521 NA's
@@ -65,7 +64,9 @@ summary(combinedDataSet, na.rm = TRUE)
 ## Part 2: Summary Statistics ##
 #################################################
 
-meanFarmVal = mean(combinedDataSet$adjfarmval, na.rm = TRUE)
+# 1. Generate a table of summary statistics for adjustment farm values, year, your new
+# binary railroad measure, and the railroad km measure to answer the following
+# questions meanFarmVal = mean(combinedDataSet$adjfarmval, na.rm = TRUE)
 
 noRR = subset(combinedDataSet,`RR?` == 0)
 numberNoRR = nrow(noRR)
@@ -75,6 +76,9 @@ percentNoRailRoad = (numberNoRR / total) * 100
 avgRRKM = mean(combinedDataSet$RRinitialtotaldist, na.rm = TRUE)
 
 standardDevRRKM = sd(combinedDataSet$RRinitialtotaldist , na.rm=TRUE)
+
+table1 <- table(meanFarmVal, percentNoRailRoad, avgRRKM, standardDevRRKM)
+table1
 
 #Question 4: What is the mean inflation adjusted farm value?
 print(meanFarmVal)
@@ -97,6 +101,7 @@ print(standardDevRRKM)
 #Part 3: Scatterplots with Binary RR Treatment 
 #################################################
 
+### 
 X = combinedDataSet$YEAR
 Y = log(combinedDataSet$adjfarmval)
 
