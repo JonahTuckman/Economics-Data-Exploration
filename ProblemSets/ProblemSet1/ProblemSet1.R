@@ -160,14 +160,19 @@ dev.off()
 #################################################
 
 #4.1. Generate a new variable, after, which is equal to 1 if the year>1885 and 0 if year<=1885.
+
+### Adding variable column based on if year is before or after 1985
 combinedDataSet[, '1985'] <- ifelse(combinedDataSet['YEAR'] > 1885, 1, 0)
 
 
 #4.2. Generate the interaction term for the DID
+
 #### Railroads is interaction term (X), will run with different outcomes
 RR1985 <- combinedDataSet$`1985`
+## Adding RRNonFactor, same as RR? but non factor version 
 combinedDataSet$RRNonFactor <- ifelse(combinedDataSet['RRinitialtotaldist'] > 0,1,0) # needed for multiplication 
                                                                                     # Because RR? is a factor now
+
 RRBinary <- combinedDataSet$RRNonFactor
 combinedDataSet$XInteraction <- (RRBinary * RR1985)
 
@@ -182,14 +187,27 @@ summary((DIDFirst))
 #4.4. Run a standard DID model using the natural log of adjusted farm values as the outcome
 combinedDataSet$YFarmLog = log(combinedDataSet$adjfarmval)
 
-
+### Dif in Dif  linear model
 DIDSecond <- lm(YFarmLog ~ `RR?` + `1985` + XInt, data = combinedDataSet)
 summary(DIDSecond)
 
 #Question 8: Interpret the four coefficients of interest in this regression.
+
+### The four coefficients of interest in this regression are Intercept, 'RR?', '1985' the interaction coefficient (X Interaction).
+### When analyzing a regression model, the coefficients imply the weight associated with each and essentially indicate the importance
+### of each variable. The coeficient of RR? implies that before the rail roads were introduced in 1985, there was a farmvalue of .47 units.
+### Then after 1985 when trains were introduced, there is a weight / coefficient of .61 which is an increase from that prior to the innovation. 
+
+
+
 #Question 9: Discuss the merits of this model. Do you think that this is a reasonable DID
 #model based on the fundamental assumptions?
 
+### When answering this question we have to analyze if there is a parallel trend between the two datasets prior to the introduction 
+### of the inovative action. In this case the time period is short enough and the trend seems to be correlated enoguh (with similar coefficients)
+### to imply a correlation between the two. 
+### Considering all of our coefficient variables are lower than 1%, there is significantly more justification behind our presumption of a correlation
+### between the variables prior to rail road introcution followed by a change post rail road introduction.
 
 #################################################
 # Part 5: Generate New KM Based Graphs
