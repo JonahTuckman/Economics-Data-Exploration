@@ -17,13 +17,17 @@ install.packages("tidyverse")
 library(tidyverse)
 install.packages("dplyr")
 install.packages("ggplot2")
+library("ggplot2")
+library("dplyr")
 
 combinedDataSet <- read.csv('data/DataDay1CountyData.csv')
-combinedDataSet <- transform(combinedDataSet, adjfarmval = (FAVAL/Annual.Average/100))
+combinedDataSet <- transform(combinedDataSet, adjfarmval = (FAVAL/(Annual.Average/100)))
 colnames(dataset) <- c("FIPS", "RRinitialtotaldist")
 combinedDataSet <- merge(combinedDataSet, dataset, by = "FIPS")
 
+#################################################
 ## PART 1:Dataset Construction ##
+#################################################
 
 # Question 1: What is a unit of observation in the data?
 ### A unit of observation in the data is kilometers in terms of rail road distance. 
@@ -39,7 +43,9 @@ combinedDataSet <- subset(combinedDataSet, (YEAR <= 1930))
 summary(combinedDataSet, na.rm = TRUE)
 ### 5521 NA's
 
+#################################################
 ## Part 2: Summary Statistics ##
+#################################################
 
 meanFarmVal = mean(combinedDataSet$adjfarmval, na.rm = TRUE)
 
@@ -54,7 +60,7 @@ standardDevRRKM = sd(combinedDataSet$RRinitialtotaldist , na.rm=TRUE)
 
 #Question 4: What is the mean inflation adjusted farm value?
 print(meanFarmVal)
-#.01047715
+#104.7715
 
 #Question 5: What percent of counties did not receive any railroad?
 print(percentNoRailRoad)
@@ -69,29 +75,28 @@ print(standardDevRRKM)
 # 101.62
 
 
-## Part 3: Scatterplots with Binary RR Treatment ## 
+#################################################
+#Part 3: Scatterplots with Binary RR Treatment 
+#################################################
+
 X = combinedDataSet$YEAR
 Y = log(combinedDataSet$adjfarmval)
 
-# 1. Create a scatterplot with a local polynomial line for the ever RR group
+#3.1. Create a scatterplot with a local polynomial line for the ever RR group
 RRever = subset(combinedDataSet, `RR?` == 1)
 XEver = RRever$YEAR
 YEver = log(RRever$adjfarmval)
 plotEver <- ggplot(data = RRever, mapping = aes(x = XEver,y = YEver)) + geom_point() + geom_smooth()
 plotEver
 
-# abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
-
-# 2. Create a scatterplot with a local polynomial line for the never RR group.
+#3.2. Create a scatterplot with a local polynomial line for the never RR group.
 RRnever = subset(combinedDataSet, `RR?` == 0)
 Xnever = RRnever$YEAR
 Ynever = log(RRnever$adjfarmval)
 plotNever <- ggplot(data = RRnever, mapping = aes(x = Xnever, y = Ynever)) + geom_point() + geom_smooth()
 plotNever
 
-#abline(lm(Ynever ~ Xnever, data = RRnever), col = 'blue')
-
-"3. Create a scatterplot with the entire dataset in one graph. This should have the points
+"3.3. Create a scatterplot with the entire dataset in one graph. This should have the points
 plotted in different colors and the lines in different colors. This is so we can start to see
 how different the two areas are."
 
@@ -105,34 +110,77 @@ plotCombined <- ggplot(data = combinedDataSet, aes(x = YEAR, y = YCombined,
   
 plotCombined
 
-# plot(XEver, YEver,col = 'blue', xlab = 'X', ylab = 'Y', ylim = range(-10: 2))
-# par(new = TRUE, yaxs = "i") # Adds both plots to the single graph
-# plot(Xnever, Ynever, col = 'red', xlab = '', ylab = '', ylim = range(-10:2))
-# abline(lm(YEver ~ XEver, data = RRever), col = 'blue')
-# abline(lm(Ynever ~ Xnever, data = RRnever), col = 'red')
-
+#################################################
 # Part 4: Basic Difference – in – Difference (DID) Models
+#################################################
 
-#1. Generate a new variable, after, which is equal to 1 if the year>1885 and 0 if year<=1885.
+#4.1. Generate a new variable, after, which is equal to 1 if the year>1885 and 0 if year<=1885.
 combinedDataSet[, '1985'] <- ifelse(combinedDataSet['YEAR'] > 1885, 1, 0)
-# 2. Generate the interaction term for the DID
+
+
+#4.2. Generate the interaction term for the DID
 #### Railroads is interaction term (X), will run with different outcomes
-Xinter = combinedDataSet$`RR?`
-# Xinter2 = combinedDataSet$RRinitialtotaldist
+RR1985 <- combinedDataSet$`1985`
+combinedDataSet$RRNonFactor <- ifelse(combinedDataSet['RRinitialtotaldist'] > 0,1,0) # needed for multiplication 
+                                                                                    # Because RR? is a factor now
+RRBinary <- combinedDataSet$RRNonFactor
+combinedDataSet$XInteraction <- (RRBinary * RR1985)
 
-# 3. Run a standard DID model using adjusted farm values as the outcome
+
+#4.3. Run a standard DID model using adjusted farm values as the outcome
 YFarm = combinedDataSet$adjfarmval
-plot(Xinter, YFarm,
-     type = "p",
-     ylim = range(-1:3))
-abline(lm(YFarm ~ Xinter, data = combinedDataSet), col = 'red')
+XInt = combinedDataSet$XInteraction
 
-# 4. Run a standard DID model using the natural log of adjusted farm values as the outcome
-YFarmLog = log(combinedDataSet$adjfarmval)
-plot(Xinter, YFarmLog,
-     type = "p",
-     ylim = range(-10:1))
-abline(lm(YFarmLog ~ Xinter, data = combinedDataSet), col = 'red')
+DIDFirst <- lm(YFarm ~ `RR?` + `1985` + XInt, data = combinedDataSet)
+summary((DIDFirst))
+
+#4.4. Run a standard DID model using the natural log of adjusted farm values as the outcome
+combinedDataSet$YFarmLog = log(combinedDataSet$adjfarmval)
+
+
+DIDSecond <- lm(YFarmLog ~ `RR?` + `1985` + XInt, data = combinedDataSet)
+summary(DIDSecond)
+
+#Question 8: Interpret the four coefficients of interest in this regression.
+#Question 9: Discuss the merits of this model. Do you think that this is a reasonable DID
+#model based on the fundamental assumptions?
+
+
+#################################################
+# Part 5: Generate New KM Based Graphs
+#################################################
+
+# 5.1 Generate a new measure of railroad km. This new measure should equal the
+# Ln(RRinitialtotaldist + 1)
+
+combinedDataSet$NewTotalDist = log(combinedDataSet$RRinitialtotaldist + 1)
+
+
+# 5.2. Create two new scatterplots with polynomial lines. For the first plot let Y = Ln(AdjustedFarm Values) & X = RRinitialtotaldist.
+# For the second plot let Y = Ln(Adjusted FarmValues) , X = your new log measure.
+
+YAdjFarmVal = log(combinedDataSet$adjfarmval)
+XAdjFarmVal = combinedDataSet$RRinitialtotaldist
+
+plot1 <- ggplot(data = combinedDataSet, aes(x = XAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
+plot1
+
+# Y is same
+XNewAdjFarmVal = combinedDataSet$NewTotalDist
+
+plot2 <- ggplot(data = combinedDataSet, aes(x = XNewAdjFarmVal, y = YAdjFarmVal)) + geom_point() + geom_smooth()
+plot2
+
+
+# Question 10: Describe the patterns in the two figures above.
+
+#################################################
+#Part 6: Run Simple Bivariate Regressions
+#################################################
+
+# Building regressions similar to part 5 plots
+
+# 6.1. For the first regression, let Y = Ln(Adjusted Farm Values) & X = RRinitialtotaldist.
 
 
 
