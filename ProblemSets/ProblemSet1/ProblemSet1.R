@@ -9,21 +9,18 @@
 setwd('/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/ProblemSets/ProblemSet1')
 ## This line sets the working directory to the local path on my machine
 
-dataset <- read.csv('data/CountyRRData.csv')
+#### Importing needed datasets
+dataset <- read.csv('data/CountyRRData.csv') 
 farmval <- read.csv('data/Dataset_1.1.csv')
 cpiData <- read.csv('data/AnnualCPI_1800_2017.csv')
 
+#### Installing needed packages
 install.packages("tidyverse")
 library(tidyverse)
 install.packages("dplyr")
 install.packages("ggplot2")
 library("ggplot2")
 library("dplyr")
-
-combinedDataSet <- read.csv('data/DataDay1CountyData.csv')
-combinedDataSet <- transform(combinedDataSet, adjfarmval = (FAVAL/(Annual.Average/100)))
-colnames(dataset) <- c("FIPS", "RRinitialtotaldist")
-combinedDataSet <- merge(combinedDataSet, dataset, by = "FIPS")
 
 #################################################
 ## PART 1:Dataset Construction ##
@@ -32,12 +29,33 @@ combinedDataSet <- merge(combinedDataSet, dataset, by = "FIPS")
 # Question 1: What is a unit of observation in the data?
 ### A unit of observation in the data is kilometers in terms of rail road distance. 
 
+# 1.1 Construct a county-level panel dataset with farm values and railroad kms. (Hint: Make
+# sure you drop/delete any unnecessary data.)
 
+## Reading dataset from dataday1
+combinedDataSet <- read.csv('data/DataDay1CountyData.csv')
+### Adding adjfarmval variable into dataset
+combinedDataSet <- transform(combinedDataSet, adjfarmval = (FAVAL/(Annual.Average/100)))
+### Updating column names
+colnames(dataset) <- c("FIPS", "RRinitialtotaldist")
+### adding countyrailroad data to dataset
+combinedDataSet <- merge(combinedDataSet, dataset, by = "FIPS")
+
+# 1. 2. Now create an indicator (dummy) variable for whether or not the county ever receives a
+# railroad.
+
+### Adding variable which shows if a county had a railroad
 combinedDataSet[, 'RR?'] <- ifelse(combinedDataSet['RRinitialtotaldist'] == 0, 0, 1)
+
+# 3. We want to focus on the era of railroad expansion so drop all observations after 1930
+
+### removing all years after 1930
 combinedDataSet <- subset(combinedDataSet, (YEAR <= 1930))
 
 # Question 2: How many observations are in your dataset after this adjustment?
-### 30,770
+nrow(combinedDataSet)
+### Number of rows / number of observations: 30,770
+
 
 # Question 3: How many missing land values do you have?
 summary(combinedDataSet, na.rm = TRUE)
