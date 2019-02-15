@@ -181,6 +181,18 @@ plot2
 # Building regressions similar to part 5 plots
 
 # 6.1. For the first regression, let Y = Ln(Adjusted Farm Values) & X = RRinitialtotaldist.
+XAdjFarmVal = combinedDataSet$RRinitialtotaldist
+
+nonLogReg <- lm(YAdjFarmVal ~ XAdjFarmVal, data = combinedDataSet )
+summary(nonLogReg)
+
+# 6.2. For the second regression, let Y = Ln(Adjusted Farm Values) , X = your new log measure
+
+XNewAdjFarmVal = combinedDataSet$NewTotalDist
+LogReg <- lm(YAdjFarmVal ~ XNewAdjFarmVal, data = combinedDataSet)
+summary(LogReg)
 
 
-
+# Question 11: Interpret the coefficients of interest from both models.
+# Question 12: Discuss the type of endogeneity concerns you would have regarding these
+# models.
