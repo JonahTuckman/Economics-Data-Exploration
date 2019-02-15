@@ -265,5 +265,16 @@ summary(LogReg)
 
 
 # Question 11: Interpret the coefficients of interest from both models.
+
+### In the first mdoel, the only coefficients are the Intercept and the XAdjusted Farm Value variable which we created.
+### This initially is the Rail Road initial total distance. In this case the coefficient of the values is very small (2.629e-3 
+### showing minial significance mathematically).
+### In the second model, the coefficient is our adjusted value of the new total distance which is the log of the initial total distance + 1.
+### This coefficient is small (.218) but certainly larger than the other which shows a higher significance level. 
+
 # Question 12: Discuss the type of endogeneity concerns you would have regarding these
 # models.
+### Endogeneity concerns that I have are that railroad development are more likely in places of high growth, thus higher innovation and gains 
+### may have been coming to these counties already.
+### Mathematically a Std. error being incredibly low is not always a great thing because it can show overfitting in a model. In predictive models
+### this is dangerous and in regression models this can lead to a guess line that finds trends that may not truly be present. 
