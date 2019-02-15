@@ -8,6 +8,8 @@
 
 setwd('/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/ProblemSets/ProblemSet1')
 ## This line sets the working directory to the local path on my machine
+images_dir <- '/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/ProblemSet1/Images'
+
 
 #### Importing needed datasets
 dataset <- read.csv('data/CountyRRData.csv') 
@@ -101,37 +103,57 @@ print(standardDevRRKM)
 #Part 3: Scatterplots with Binary RR Treatment 
 #################################################
 
-### 
+### X = Year
 X = combinedDataSet$YEAR
+### Y = Ln(Adjusted Farm Values) 
 Y = log(combinedDataSet$adjfarmval)
 
 #3.1. Create a scatterplot with a local polynomial line for the ever RR group
+
+### Ever Group
+## group if there is a railroad
 RRever = subset(combinedDataSet, `RR?` == 1)
+# Year
 XEver = RRever$YEAR
+# Log of adjusted farm value in this subset
 YEver = log(RRever$adjfarmval)
+# plot of this grouping
 plotEver <- ggplot(data = RRever, mapping = aes(x = XEver,y = YEver)) + geom_point() + geom_smooth()
-plotEver
+plotEver + ggtitle("Ever Plot") + xlab("Year") + ylab("Log of Adjusted Farm Value")
+## Copying image into directory to be added into images directory
+dev.copy(png, 'PlotEver.png')
+dev.off()
 
 #3.2. Create a scatterplot with a local polynomial line for the never RR group.
+
+## Dataset of counties which did not recieve a railroad 
 RRnever = subset(combinedDataSet, `RR?` == 0)
 Xnever = RRnever$YEAR
+### Log of adjusted farm value
 Ynever = log(RRnever$adjfarmval)
+# plot of this grouping
 plotNever <- ggplot(data = RRnever, mapping = aes(x = Xnever, y = Ynever)) + geom_point() + geom_smooth()
-plotNever
+plotNever + ggtitle("Never Plot") + xlab("Year") + ylab("Log of Adjusted Farm Value")
+## Copying image into directory to be added into images directory
+dev.copy(png, "PlotNever.png")
+dev.off()
 
 "3.3. Create a scatterplot with the entire dataset in one graph. This should have the points
 plotted in different colors and the lines in different colors. This is so we can start to see
 how different the two areas are."
 
 ## Run together as a grouping. 
+## Total dataset, made into factor
 combinedDataSet$`RR?` <- as.factor(combinedDataSet$`RR?`)
 
+## Log of adjusted farm values
 YCombined <- log(combinedDataSet$adjfarmval)
 plotCombined <- ggplot(data = combinedDataSet, aes(x = YEAR, y = YCombined,
                                                    color = combinedDataSet$`RR?`,
                                                    shape = combinedDataSet$`RR?`)) + geom_point() + geom_smooth()
-  
-plotCombined
+plotCombined + ggtitle("Never and Ever Combined Plot") + xlab("Year") + ylab("Log of Adjusted Farm Value")
+dev.copy(png, "NeverAndEverCombined.png")
+dev.off()
 
 #################################################
 # Part 4: Basic Difference – in – Difference (DID) Models
