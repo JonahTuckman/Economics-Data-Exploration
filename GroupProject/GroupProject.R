@@ -1,5 +1,5 @@
-
-
+# Data Source: 
+# https://www2.census.gov/programs-surveys/decennial/tables/time-series/historical-income-counties/county3.csv
 
 
 setwd('/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/GroupProject/')
