@@ -1,0 +1,14 @@
+Colin Croghan
+Jonah Tuckman
+Robert Nisbet
+
+Topic Proposal
+Question: How did the release of the Macintosh computer in 1984 affect high-tech (high-income) versus low-tech (low-income) counties in California?
+Data: US Census Bureau - Per Capita Income by County: 1959, 1969, 1979, 1989
+https://www2.census.gov/programs-surveys/decennial/tables/time-series/historical-income-counties/county3.csv
+
+We will use county-level Census income data to discern how the release of the Macintosh computer in 1984 affected income in high-tech urban counties compared to low-tech more rural counties. With the understanding of the true definition of what ‘High-Tech’ and ‘Low-Tech’ means, this question can also be understood as a study in the change in GDP per capita in California counties after the release of the Macintosh computer in high-income and low-income communities. This technological development was one of the biggest leaps society has taken in the past 50 years. Thus we will look to the data to understand if this technological advancement helped all equally, or if there was a discrepancy between classes in terms of access.
+The data recorded income in 1959, 1969, 1979, and 1989, allowing us to see if the rollout of the computer in 1984 affected income at all, or if any changes in income were simply part of a larger overall trend. 
+We have taken the data above and pulled it into a CSV format, we then trimmed it to include only California counties and will then decide our split of high-income and low-income groupings to compare. 
+
+
