@@ -33,43 +33,30 @@ toMatch <- c("San Francisco" , "San Mateo" , "Santa Clara" , "Alameda" , "Contra
              "Napa" , "Sonoma" , "Marin", "Los Angeles", "Orange County", "San Diego")
 CaliHighTech <- data.frame(CaliData)
 CaliHighTech <- subset(CaliHighTech, grepl(paste(toMatch, collapse="|"), State.and.County))
-write.csv(CaliHighTech, "CaliHighTech.csv")
+ 
+### Removed Commas from numbers here to avoid importation as type factor
+### Opened in text file, deleted commas, reopened in numbers and saved as CaliHighTech2.csv
 
-CaliHighIncome <- read.csv("CaliHighTech.csv")
-CaliHighIncome$X <- NULL
+CaliHighIncome <- read.csv("CaliHighTech2.csv")
+CaliHighIncome$X <- NULL ## Adds X column which is empty
 CaliHighIncome$State.and.County <- NULL ## No names (categorical variables suck to deal with)
 summary(CaliHighIncome)
 
-## Convertion bellow ################################################
-
-testdf <- as.data.frame(lapply(CaliHighIncome, factor))
-str(testdf)
-
-testdf[] <- lapply(testdf, function(x)
-  as.numeric(levels(x))[x])
+sapply(CaliHighIncome, class) ## Shows breakdown of columns by type
 
 
-summary(testdf)
-sapply(testdf, class)
-
-CaliHighIncome <- transform(CaliHighIncome, class=as.numeric(as.character(CaliHighIncome)))
-
-
-
-sapply(CaliHighIncome, class)
-sapply(CaliData, class)
-
-
-CaliHighIncome$X1959 <- as.numeric(as.character(CaliHighIncome$X1959))
-
-CaliHighIncome$X1969 <- as.numeric(CaliHighIncome$X1969)
-CaliHighIncome$X1979 <- as.numeric(CaliHighIncome$X1979)
-CaliHighIncome$X1989 <- as.numeric(CaliHighIncome$X1989)
-
-summary(CaliHighIncome)
-
-##########################################################################
 all(duplicated(CaliHighIncome$X1979)[-1L]) ## Test for constant vector
+# Returns false which is good 
 
-averageHighTech79 = lapply(CaliHighIncome, mean, na.rm = TRUE)
-StandardDev79 <- sd(CaliHighIncome$X1959, na.rm = TRUE)
+
+# Means of each year
+averageHighTech59 = mean(CaliHighIncome$X1959, na.rm = TRUE)
+averageHighTech69 = mean(CaliHighIncome$X1969, na.rm = TRUE)
+averageHighTech79 = mean(CaliHighIncome$X1979, na.rm = TRUE)
+averageHighTech89 = mean(CaliHighIncome$X1989, na.rm = TRUE)
+
+#Standard deviation of each year
+StandardDev59 <- sd(CaliHighIncome$X1959, na.rm = TRUE)
+StandardDev69 <- sd(CaliHighIncome$X1969, na.rm = TRUE)
+StandardDev79 <- sd(CaliHighIncome$X1979, na.rm = TRUE)
+StandardDev89 <- sd(CaliHighIncome$X1989, na.rm = TRUE)
