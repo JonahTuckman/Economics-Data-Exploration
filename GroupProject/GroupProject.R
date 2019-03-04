@@ -38,7 +38,7 @@ CaliHighTech <- subset(CaliHighTech, grepl(paste(toMatch, collapse="|"), State.a
 ### Opened in text file, deleted commas, reopened in numbers and saved as CaliHighTech2.csv
 
 CaliHighIncome <- read.csv("CaliHighTech2.csv")
-CaliHighIncome$X <- NULL ## Adds X column which is empty
+CaliHighIncome$X <- NULL ## Adds X column of index from original list. Not needed
 CaliHighIncome$State.and.County <- NULL ## No names (categorical variables suck to deal with)
 summary(CaliHighIncome)
 
