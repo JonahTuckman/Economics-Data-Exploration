@@ -180,6 +180,9 @@ dev.off()
 
 Combined$HighxLow <- Combined$High*Combined$Low
 
-nonLogReg <- lm(log(HighxLow) ~ log(Low), data = Combined)
-summary(nonLogReg)
+nonLogHigh <- lm(log(HighxLow) ~ log(High), data = Combined)
+summary(nonLogHigh)
+
+nonLogLow <- lm(log(HighxLow) ~ log(Low), data = Combined)
+summary(nonLogLow)
 
