@@ -163,3 +163,8 @@ combined
 dev.copy(png, "Combined.png")
 dev.off()
 
+
+### Dif n Dif regression 
+nonLogReg <- lm(log(High) ~ log(Low), data = Combined )
+summary(nonLogReg)
+
