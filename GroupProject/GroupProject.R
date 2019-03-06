@@ -140,22 +140,33 @@ YLow <- log(avgLow$Average.GDP.Per.Capita)
 plotAvgLow <- ggplot(data = avgLow, mapping = aes(x = XLow,y = YLow)) + geom_point() + geom_smooth(colour = "darkblue", size = 1)
 plotAvgLow + ggtitle("Average Low Income") + xlab("Year") + ylab("Income Per Capita")
 
+### Percent Growth 
+
+#High
+HighPerc69 <- ((averageHighIncome69 + averageHighIncome59) / averageHighIncome59)
+HighPerc79 <- ((averageHighIncome79 + averageHighIncome69) / averageHighIncome69)
+HighPerc89 <- ((averageHighIncome89 + averageHighIncome79) / averageHighIncome79)
+
+#Low
+LowPerc69 <- ((averageLowIncome69 + averageLowIncome59) / averageLowIncome59)
+LowPerc79 <- ((averageLowIncome79 + averageLowIncome69) / averageLowIncome69)
+LowPerc89 <- ((averageLowIncome89 + averageLowIncome79) / averageLowIncome79)
 
 #Combine a dataset
-Combined <- data.frame("Year" = c(1959, 1969, 1979, 1989),
-                       "High" = c(averageHighIncome59, averageHighIncome69, averageHighIncome79, averageHighIncome89),
-                       "Low" = c(averageLowIncome59, averageLowIncome69, averageLowIncome79, averageLowIncome89)
-                       )
+Combined <- data.frame("Year" = c(1969, 1979, 1989),
+                       "High" = c(HighPerc69, HighPerc79, HighPerc89),
+                       "Low" = c(LowPerc69, LowPerc79, LowPerc89)
+)
 
 ##### Combined Plot
 combined <- ggplot() + 
   #High -> Red Plot
-  geom_point(data=avgHigh, aes(x = XHigh, y = YHigh)) + 
-  geom_smooth(data=avgHigh, aes(x = XHigh, y = YHigh), fill = "red", 
+  geom_point(data=Combined, aes(x = Year, y = High)) + 
+  geom_smooth(data=Combined, aes(x = Year, y = High), fill = "red", 
               colour="darkred", size = 1) +
   #Low -> Blue Plot
-  geom_point(data=avgLow, aes(x = XLow, y = YLow)) + 
-  geom_smooth(data=avgLow, aes(x=XLow, y = YLow), fill = "blue",
+  geom_point(data=Combined, aes(x = Year, y = Low)) + 
+  geom_smooth(data=Combined, aes(x=Year, y = Low), fill = "blue",
               colour = "darkblue", size = 1) +
   ggtitle("Combined Income Change") + xlab("Year") + ylab("Income Per Capita") 
   # + geom_vline(xintercept=1980) + geom_vline(xintercept = 1970)
@@ -166,6 +177,9 @@ dev.off()
 
 
 ### Dif n Dif regression 
-nonLogReg <- lm(log(High) ~ log(Low), data = Combined )
+
+Combined$HighxLow <- Combined$High*Combined$Low
+
+nonLogReg <- lm(log(HighxLow) ~ log(Low), data = Combined)
 summary(nonLogReg)
 
