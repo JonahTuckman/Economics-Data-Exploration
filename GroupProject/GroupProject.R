@@ -7,6 +7,8 @@ install.packages("tidyverse")
 library(tidyverse)
 install.packages("dplyr")
 install.packages("ggplot2")
+install.packages("ggpubr")
+library("ggpubr")
 library("ggplot2")
 library("dplyr")
 
@@ -128,14 +130,14 @@ avgLow <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita
 XHigh <- avgHigh$Year
 YHigh <- log(avgHigh$Average.GDP.Per.Capita)
 
-plotAvgHigh <- ggplot(data = avgHigh, mapping = aes(x = XHigh,y = YHigh)) + geom_point() + geom_smooth()
+plotAvgHigh <- ggplot(data = avgHigh, mapping = aes(x = XHigh,y = YHigh)) + geom_point() + geom_smooth(colour="darkred", size = 1)
 plotAvgHigh + ggtitle("Average High Income") + xlab("Year") + ylab("Income Per Capita")
 
 ##### Plotting Low Income
 XLow <- avgLow$Year
 YLow <- log(avgLow$Average.GDP.Per.Capita)
 
-plotAvgLow <- ggplot(data = avgLow, mapping = aes(x = XLow,y = YLow)) + geom_point() + geom_smooth()
+plotAvgLow <- ggplot(data = avgLow, mapping = aes(x = XLow,y = YLow)) + geom_point() + geom_smooth(colour = "darkblue", size = 1)
 plotAvgLow + ggtitle("Average Low Income") + xlab("Year") + ylab("Income Per Capita")
 
 
@@ -146,14 +148,18 @@ Combined <- data.frame("Year" = c(1959, 1969, 1979, 1989),
                        )
 
 ##### Combined Plot
-combined <- ggarrange()
+combined <- ggplot() + 
+  #High -> Red Plot
+  geom_point(data=avgHigh, aes(x = XHigh, y = YHigh)) + 
+  geom_smooth(data=avgHigh, aes(x = XHigh, y = YHigh), fill = "red", 
+              colour="darkred", size = 1) +
+  #Low -> Blue Plot
+  geom_point(data=avgLow, aes(x = XLow, y = YLow)) + 
+  geom_smooth(data=avgLow, aes(x=XLow, y = YLow), fill = "blue",
+              colour = "darkblue", size = 1) +
+  ggtitle("Combined Income Change") + xlab("Year") + ylab("Income Per Capita")
+combined
 
-
-
-plotCombined <- ggplot(data = Combined, aes(x = Year, y = High,
-                                                   color = Combined$Low,
-                                                   shape = Combined$Low)) + geom_point() + geom_smooth()
-plotCombined + ggtitle("Combined Plot") + xlab("Year") + ylab("GDP Per Capita")
 dev.copy(png, "Combined.png")
 dev.off()
 
