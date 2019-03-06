@@ -124,3 +124,16 @@ table89
 avgHigh <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageHighIncome59, averageHighIncome69, averageHighIncome79, averageHighIncome89))
 avgLow <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageLowIncome59, averageLowIncome69, averageLowIncome79, averageLowIncome89))
 
+##### Plotting High Income
+XHigh <- avgHigh$Year
+YHigh <- log(avgHigh$Average.GDP.Per.Capita)
+
+plotAvgHigh <- ggplot(data = avgHigh, mapping = aes(x = XHigh,y = YHigh)) + geom_point() + geom_smooth()
+plotAvgHigh + ggtitle("Average High Income") + xlab("Year") + ylab("Income Per Capita")
+
+##### Plotting Low Income
+XLow <- avgLow$Year
+YLow <- log(avgLow$Average.GDP.Per.Capita)
+
+plotAvgLow <- ggplot(data = avgLow, mapping = aes(x = XLow,y = YLow)) + geom_point() + geom_smooth()
+plotAvgLow + ggtitle("Average Low Income") + xlab("Year") + ylab("Income Per Capita")
