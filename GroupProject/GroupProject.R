@@ -157,7 +157,8 @@ combined <- ggplot() +
   geom_point(data=avgLow, aes(x = XLow, y = YLow)) + 
   geom_smooth(data=avgLow, aes(x=XLow, y = YLow), fill = "blue",
               colour = "darkblue", size = 1) +
-  ggtitle("Combined Income Change") + xlab("Year") + ylab("Income Per Capita")
+  ggtitle("Combined Income Change") + xlab("Year") + ylab("Income Per Capita") 
+  # + geom_vline(xintercept=1980) + geom_vline(xintercept = 1970)
 combined
 
 dev.copy(png, "Combined.png")
