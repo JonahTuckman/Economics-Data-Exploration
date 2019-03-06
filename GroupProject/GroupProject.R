@@ -137,3 +137,23 @@ YLow <- log(avgLow$Average.GDP.Per.Capita)
 
 plotAvgLow <- ggplot(data = avgLow, mapping = aes(x = XLow,y = YLow)) + geom_point() + geom_smooth()
 plotAvgLow + ggtitle("Average Low Income") + xlab("Year") + ylab("Income Per Capita")
+
+
+#Combine a dataset
+Combined <- data.frame("Year" = c(1959, 1969, 1979, 1989),
+                       "High" = c(averageHighIncome59, averageHighIncome69, averageHighIncome79, averageHighIncome89),
+                       "Low" = c(averageLowIncome59, averageLowIncome69, averageLowIncome79, averageLowIncome89)
+                       )
+
+##### Combined Plot
+combined <- ggarrange()
+
+
+
+plotCombined <- ggplot(data = Combined, aes(x = Year, y = High,
+                                                   color = Combined$Low,
+                                                   shape = Combined$Low)) + geom_point() + geom_smooth()
+plotCombined + ggtitle("Combined Plot") + xlab("Year") + ylab("GDP Per Capita")
+dev.copy(png, "Combined.png")
+dev.off()
+
