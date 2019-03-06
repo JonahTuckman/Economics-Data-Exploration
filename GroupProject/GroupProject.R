@@ -119,3 +119,8 @@ table79
 table89 <- table(averageHighIncome89, averageLowIncome89)
 table89
 
+
+# Data to be used for plotting. Year vs Average in High vs Low Income
+avgHigh <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageHighIncome59, averageHighIncome69, averageHighIncome79, averageHighIncome89))
+avgLow <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageLowIncome59, averageLowIncome69, averageLowIncome79, averageLowIncome89))
+
