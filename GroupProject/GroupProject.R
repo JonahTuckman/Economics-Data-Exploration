@@ -33,6 +33,23 @@ toMatch <- c("San Francisco" , "San Mateo" , "Santa Clara" , "Alameda" , "Contra
              "Napa" , "Sonoma" , "Marin", "Los Angeles", "Orange County", "San Diego")
 CaliHighTech <- data.frame(CaliData)
 CaliHighTech <- subset(CaliHighTech, grepl(paste(toMatch, collapse="|"), State.and.County))
+
+CaliLowIncome <- data.frame(CaliData)
+CaliLowIncome <- subset(CaliLowIncome, !grepl(paste(toMatch, collapse="|"), State.and.County))
+
+## Replace the commas in the numbers to avoid importation as factor 
+replaceCommas<-function(X){
+  X<-as.numeric(gsub("\\,", "", X))
+}
+
+#replacement. Must do this indivudally to keep the commas in the state and county
+# commenting after doing and realizing we are deleting that column in a moment so not needed...
+CaliLowIncome$X1959 <- replaceCommas(CaliLowIncome$X1959)
+CaliLowIncome$X1969 <- replaceCommas(CaliLowIncome$X1969)
+CaliLowIncome$X1979 <- replaceCommas(CaliLowIncome$X1979)
+CaliLowIncome$X1989 <- replaceCommas(CaliLowIncome$X1989)
+
+write.csv(CaliLowIncome, "CaliLowIncome.csv")
  
 ### Removed Commas from numbers here to avoid importation as type factor
 ### Opened in text file, deleted commas, reopened in numbers and saved as CaliHighTech2.csv
