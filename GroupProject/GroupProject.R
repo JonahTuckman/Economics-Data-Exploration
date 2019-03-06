@@ -104,3 +104,18 @@ StandardDevLow59 <- sd(CaliLowIncome$X1959, na.rm = TRUE)
 StandardDevLow69 <- sd(CaliLowIncome$X1969, na.rm = TRUE)
 StandardDevLow79 <- sd(CaliLowIncome$X1979, na.rm = TRUE)
 StandardDevLow89 <- sd(CaliLowIncome$X1989, na.rm = TRUE)
+
+
+# Visual Tabling
+table59 <- table(averageHighIncome59, averageLowIncome59)
+table59
+
+table69 <- table(averageHighIncome69, averageLowIncome69)
+table69
+
+table79 <- table(averageHighIncome79, averageLowIncome79)
+table79
+
+table89 <- table(averageHighIncome89, averageLowIncome89)
+table89
+
