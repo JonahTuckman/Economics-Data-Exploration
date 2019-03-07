@@ -168,7 +168,7 @@ combined <- ggplot() +
   geom_point(data=Combined, aes(x = Year, y = Low)) + 
   geom_smooth(data=Combined, aes(x=Year, y = Low), fill = "blue",
               colour = "darkblue", size = 1) +
-  ggtitle("Combined Income Change") + xlab("Year") + ylab("% Change in Income per Capita") 
+  ggtitle("*PRELIMINARY FINDINGS* Combined Income Change") + xlab("Year") + ylab("% Change in Income per Capita") 
   # + geom_vline(xintercept=1980) + geom_vline(xintercept = 1970)
 combined
 
