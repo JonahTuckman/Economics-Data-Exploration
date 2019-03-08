@@ -1,0 +1,15 @@
+Investigating the effects of female labor on the wage structure during World War 2. 
+The more men that were drawn away to the war from a particular county, the more women entered the workforce and for a longer period of time. 
+Women did more substituting for highschool educated men than low skilled men. 
+
+1900 -> 82% men, 18% women. 13% of women in the work force. 
+2001 -> 47% workers are women. 61% of women are in the work force.
+
+How does female labor force participation affect the structure of male and female wages?
+
+
+Our main data source is the 1 percent Integrated Public Use Microdata
+Series (IPUMS) of the decennial censuses.  Samples
+include men and women aged 14–64 in the year for which earnings are
+reported, who are not residing in institutional group quarters (such as
+prisons or barracks), and are not employed in farming
