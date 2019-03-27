@@ -126,3 +126,6 @@ dev.copy(png, "hist5.png")
 dev.off()
 
 reg4 <- lm(occ_change ~ natdum2 + natdum3 + age_clean + racedum + marrdum + age_sq, data=subset(finallinkeddata, age_clean>50))
+
+
+write.csv(finallinkeddata, file = "FinalLinkedData.csv") ## For problem set 2
