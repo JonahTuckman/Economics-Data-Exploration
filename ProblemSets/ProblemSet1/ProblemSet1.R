@@ -18,7 +18,7 @@ cpiData <- read.csv('data/AnnualCPI_1800_2017.csv')
 
 #### Installing needed packages
 install.packages("tidyverse")
-library(tidyverse)
+library("tidyverse")
 install.packages("dplyr")
 install.packages("ggplot2")
 library("ggplot2")
