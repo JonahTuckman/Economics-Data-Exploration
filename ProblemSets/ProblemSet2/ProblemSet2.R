@@ -109,3 +109,24 @@ print(100 * (count/9583))
 ### 70.67%
 
 
+### Confidence interval plot
+plot(dataset$Father.Percentile, ylim = c(0,100), type = "l")
+library(scales) # For the percent_format() function
+
+scale_y_continuous(labels = percent_format(), limits=c(0,1))
+
+LVLPLOT <- ggplot(data = dataset, mapping = aes(x = dataset$Father.Percentile, y = dataset$Level.Change))
+LVLPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
+
+RNKPLOT <- ggplot(data = dataset, mapping = aes(x = dataset$Father.Percentile, y = dataset$Rank.Change))
+RNKPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
+
+LVLUPPLOT <- ggplot(data = dataset, mapping = aes(x = dataset$Father.Percentile, y = dataset$LevelUp))
+LVLUPPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
+
+RNKUPPLOT <- ggplot(data = dataset, mapping = aes(x = dataset$Father.Percentile, y = dataset$RankUp))
+RNKUPPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
+
+
+RACERNKUP <- ggplot(data = dataset, mapping = aes(x = dataset$Rank.Change, y = dataset$race_1, method = "loess"))
+RACERNKUP + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
