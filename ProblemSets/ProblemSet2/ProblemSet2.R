@@ -59,12 +59,14 @@ dataset <- na.omit(dataset)
 ### Question 3: How many observations are in your dataset after these adjustments?
 # There are 9581 observations in the study now 
 
-install.packages("xtile")
-install.packages('xtile',repos='http://cran.us.r-project.org')
+install.packages("statar")
+library("statar")
 
+### O score percentiles
+dataset['Father Percentile'] <- xtile(dataset$occscore_1.x, n = 100)
+dataset['Son Percentile'] <- xtile(dataset$occscore_1.y, n = 100)
 
-
-
+dataset['Level Change'] <- dataset$`Father Percentile` - dataset$`Son Percentile`
 
 
 
