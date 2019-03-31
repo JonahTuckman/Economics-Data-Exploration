@@ -127,6 +127,12 @@ LVLUPPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
 RNKUPPLOT <- ggplot(data = dataset, mapping = aes(x = dataset$Father.Percentile, y = dataset$RankUp))
 RNKUPPLOT + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
 
+dataset <- transform(dataset, white = ifelse (dataset$race_1 =='white',1,0))
 
-RACERNKUP <- ggplot(data = dataset, mapping = aes(x = dataset$Rank.Change, y = dataset$race_1, method = "loess"))
+RACERNKUP <- ggplot(data = dataset, mapping = aes(x = dataset$Rank.Change, y = dataset$white, method = "loess"))
 RACERNKUP + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
+
+
+
+
+
