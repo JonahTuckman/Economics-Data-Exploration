@@ -210,3 +210,6 @@ summary(reg19)
 reg20 <- lm(dataset$RankUp ~ dataset$nativity, data = dataset )
 summary(reg20)
 
+### Question 12: Interpret the coefficient on your race dummy variable. How does this relate
+### to the intergenerational mobility paper we discussed in class?
+# This coefficient's sign matches with our discussion in class. 
