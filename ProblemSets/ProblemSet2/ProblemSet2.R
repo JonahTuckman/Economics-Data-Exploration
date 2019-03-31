@@ -136,5 +136,77 @@ RACERNKUP + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
 ### Question 11: How does this picture compare to the figures we discussed in class?
 # This is a different figure than in class because I created a binary categorical variable for race. 
 
+#  Regression Models
 
+#a. Age
+
+reg1 <- lm(dataset$Level.Change ~ dataset$age_1, data = dataset )
+summary(reg1)
+
+reg2 <- lm(dataset$Rank.Change ~ dataset$age_1, data = dataset )
+summary(reg2)
+
+reg3 <- lm(dataset$LevelUp ~ dataset$age_1, data = dataset )
+summary(reg3)
+
+reg4 <- lm(dataset$RankUp ~ dataset$age_1, data = dataset )
+summary(reg4)
+#b. Age-Squared
+
+reg5 <- lm(dataset$Level.Change ~ sqrt(dataset$age_1), data = dataset )
+summary(reg5)
+
+reg6 <- lm(dataset$Rank.Change ~ sqrt(dataset$age_1), data = dataset )
+summary(reg6)
+
+reg7 <- lm(dataset$LevelUp ~ sqrt(dataset$age_1), data = dataset )
+summary(reg7)
+
+reg8 <- lm(dataset$RankUp ~ sqrt(dataset$age_1), data = dataset )
+summary(reg8)
+
+#c. Race Dummies
+reg9 <- lm(dataset$Level.Change ~ dataset$white, data = dataset )
+summary(reg9)
+
+reg10 <- lm(dataset$Rank.Change ~ dataset$white, data = dataset )
+summary(reg10)
+
+reg11 <- lm(dataset$LevelUp ~ dataset$white, data = dataset )
+summary(reg11)
+
+reg12 <- lm(dataset$RankUp ~ dataset$white, data = dataset )
+summary(reg12)
+
+#d. Marriage Dummies
+dataset <- transform(dataset, married = ifelse (dataset$marst_1 =='married, spouse absent
+',1,0))
+
+
+reg13 <- lm(dataset$Level.Change ~ dataset$married, data = dataset )
+summary(reg13)
+
+reg14 <- lm(dataset$Rank.Change ~ dataset$married, data = dataset )
+summary(reg14)
+
+reg15 <- lm(dataset$LevelUp ~ dataset$married, data = dataset )
+summary(reg15)
+
+reg16 <- lm(dataset$RankUp ~ dataset$married, data = dataset )
+summary(reg16)
+
+#e. Nativity Dummies
+dataset <- transform(dataset, nativity = ifelse (dataset$marst_1 =='native born, and both parents native born',1,0))
+
+reg17 <- lm(dataset$Level.Change ~ dataset$nativity, data = dataset )
+summary(reg17)
+
+reg18 <- lm(dataset$Rank.Change ~ dataset$nativity, data = dataset )
+summary(reg18)
+
+reg19 <- lm(dataset$LevelUp ~ dataset$nativity, data = dataset )
+summary(reg19)
+
+reg20 <- lm(dataset$RankUp ~ dataset$nativity, data = dataset )
+summary(reg20)
 
