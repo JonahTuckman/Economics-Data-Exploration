@@ -133,6 +133,8 @@ RACERNKUP <- ggplot(data = dataset, mapping = aes(x = dataset$Rank.Change, y = d
 RACERNKUP + geom_point() + geom_smooth() + scale_y_continuous(label = percent)
 
 
+### Question 11: How does this picture compare to the figures we discussed in class?
+# This is a different figure than in class because I created a binary categorical variable for race. 
 
 
 
