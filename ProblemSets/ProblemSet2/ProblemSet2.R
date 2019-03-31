@@ -6,6 +6,12 @@
 # Purpose: Working through data in R, then python if time permits
 ####################################################################
 
+### Updating r version for xtile
+library("devtools")
+install_github('andreacirilloac/updateR')
+library(updateR)
+
+
 install.packages("dplyr")
 install.packages("ggplot2")
 library("ggplot2")
@@ -47,11 +53,18 @@ dataset <- merge(dataset, dataset[dataset$father == 1, c("serial_1", "occscore_1
 
 
 ### Now we can drop fathers from the dataset
-if (dataset$father == 1) {
-  
-}
-
 dataset[dataset$father == '1',] <- NA
 dataset <- na.omit(dataset)
+
+### Question 3: How many observations are in your dataset after these adjustments?
+# There are 9581 observations in the study now 
+
+install.packages("xtile")
+install.packages('xtile',repos='http://cran.us.r-project.org')
+
+
+
+
+
 
 
