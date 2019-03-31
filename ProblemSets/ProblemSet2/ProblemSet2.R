@@ -66,7 +66,46 @@ library("statar")
 dataset['Father Percentile'] <- xtile(dataset$occscore_1.x, n = 100)
 dataset['Son Percentile'] <- xtile(dataset$occscore_1.y, n = 100)
 
-dataset['Level Change'] <- dataset$`Father Percentile` - dataset$`Son Percentile`
+dataset['Level Change'] <- dataset$occscore_1.y - dataset$occscore_1.x
+dataset['Rank Change'] <- dataset$`Son Percentile` - dataset$`Father Percentile`
+dataset <- transform(dataset, LevelUp = ifelse (dataset$occscore_1.y > dataset$occscore_1.x,1,0))
+dataset <- transform(dataset, RankUp = ifelse (dataset$Son.Percentile > dataset$Father.Percentile,1,0))
 
+#  Question 4: What is the mean occscore for sons?
+print(mean(dataset$occscore_1.x))
+### 4.22 
+
+#  Question 5: What is the mean occscore for fathers?
+print(mean(dataset$occscore_1.y))
+### 18.2
+
+#  Question 6: What is the mean rank for sons?
+print(mean(dataset$Son.Percentile))
+### 35.55 %
+
+#  Question 7: What is the mean rank for fathers?
+print(mean(dataset$Father.Percentile))
+### 22.83%
+
+#  Question 8: What is the mean level change?
+print(mean(dataset$Level.Change))
+### 14.06 %
+
+#  Question 9: What is the mean rank change?
+print(mean(dataset$Rank.Change))
+### 12.7% 
+
+#  Question 10: What fraction of the sample had their rank improve?
+count = 0
+for (val in dataset$Rank.Change){
+  if (val > 0) {
+    count = count + 1
+  } else {
+    count = count
+  }
+}
+
+print(100 * (count/9583))
+### 70.67%
 
 
