@@ -183,6 +183,14 @@ Combined$HighxLow <- Combined$High*Combined$Low
 nonLogHigh <- lm(log(HighxLow) ~ log(High), data = Combined)
 summary(nonLogHigh)
 
+# Estimate Std. Error t value Pr(>|t|)
+# (Intercept)   -1.672      1.296  -1.291    0.420
+# log(High)      3.990      1.572   2.539    0.239
+
+
 nonLogLow <- lm(log(HighxLow) ~ log(Low), data = Combined)
 summary(nonLogLow)
 
+# Estimate Std. Error t value Pr(>|t|)  
+# (Intercept)   0.6166     0.1092   5.645   0.1116  
+# log(Low)      1.2620     0.1377   9.163   0.0692 .
