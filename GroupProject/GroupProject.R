@@ -32,7 +32,7 @@ write.csv(CaliData, "CaliData.csv")
 ## Low Tech
 ### Others
 
-
+CaliData <- read.csv("CaliData.csv")
 toMatch <- c("San Francisco" , "San Mateo" , "Santa Clara" , "Alameda" , "Contra Costa" , "Solano" ,
              "Napa" , "Sonoma" , "Marin", "Los Angeles", "Orange County", "San Diego")
 CaliHighIncome <- data.frame(CaliData)
@@ -213,7 +213,14 @@ formula <-
   nonLogHigh <- lm(CaliData$Grow ~ CaliData$HighBool, data = CaliData)
   summary(nonLogHigh)
 
-# Estimate Std. Error t value Pr(>|t|)    
+#                 Estimate Std. Error t value Pr(>|t|)    
 # (Intercept)        0.93478    0.03299  28.331   <2e-16 ***
 # CaliData$HighBool  0.06522    0.07254   0.899    0.372   
 
+  
+  DistanceModel <- lm(CaliData$Grow ~ CaliData$Ddummy, data = CaliData)
+  summary(DistanceModel)
+  
+#                 Estimate Std. Error t value Pr(>|t|)    
+#  (Intercept)      0.90909    0.04759  19.102   <2e-16 ***
+#  CaliData$Ddummy  0.06313    0.06041   1.045      0.3    
