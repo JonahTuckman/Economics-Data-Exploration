@@ -4,8 +4,6 @@ Robert Nisbet
 
 Topic Proposal
 Question: How did the release of the Macintosh computer in 1984 affect high-income versus low-income counties in California?
-Data: US Census Bureau - Per Capita Income by County: 1959, 1969, 1979, 1989
-https://www2.census.gov/programs-surveys/decennial/tables/time-series/historical-income-counties/county3.csv
 Our Work: https://github.com/JonahTuckman/Economics-Data-Exploration/tree/master/GroupProject
 
 
