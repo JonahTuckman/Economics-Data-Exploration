@@ -213,19 +213,39 @@ YEARBASED$Income <- replaceCommas(YEARBASED$Income)
 mean(YEARBASED$Income)
 YEARBASED <- read.csv("YearBasedData.csv")
 YEARBASED <- transform(YEARBASED, High = ifelse(YEARBASED$Income > 11098.78, 1,0))
+YEARBASED <- transform(YEARBASED, After84 = ifelse(YEARBASED$Year > 1984,1,0) )
 
 # nonLogHigh <- lm(log(CaliData$HighBool) + log(CaliData$X1989) + log(CaliData$X1989 * CaliData$HighBool) , data = CaliData)
-  nonLogHigh <- lm(CaliData$Grow ~ CaliData$HighBool, data = CaliData)
+  nonLogHigh <- lm(YEARBASED$High ~ YEARBASED$After84, data = CaliData)
   summary(nonLogHigh)
+  
+#                  Estimate Std. Error t value Pr(>|t|)    
+#   (Intercept)        0.29885    0.03367   8.875  < 2e-16 ***
+#    YEARBASED$After84  0.51149    0.06734   7.595 7.67e-13 ***
 
-#                 Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)        0.93478    0.03299  28.331   <2e-16 ***
-# CaliData$HighBool  0.06522    0.07254   0.899    0.372   
+  YEARBASED<- transform(YEARBASED, AfterAndHigh = (YEARBASED$High * YEARBASED$After84 + YEARBASED$After84))
+  Reformated <- lm(YEARBASED$High ~ YEARBASED$AfterAndHigh)
+  summary(Reformated)
+
+#                      Estimate Std. Error t value Pr(>|t|)    
+ # (Intercept)             0.27974    0.03169   8.829 2.74e-16 ***
+ # YEARBASED$AfterAndHigh  0.32476    0.03421   9.493  < 2e-16 ***
 
   
-  DistanceModel <- lm(CaliData$Grow ~ CaliData$Ddummy, data = CaliData)
+  DistanceModel <- lm(YEARBASED$Ddummy ~ YEARBASED$After84, data = YEARBASED)
+
   summary(DistanceModel)
   
-#                 Estimate Std. Error t value Pr(>|t|)    
-#  (Intercept)      0.90909    0.04759  19.102   <2e-16 ***
-#  CaliData$Ddummy  0.06313    0.06041   1.045      0.3    
+ #                 Estimate Std. Error t value Pr(>|t|)    
+ # (Intercept)        6.207e-01  3.694e-02    16.8   <2e-16 ***
+  # YEARBASED$After84 -2.188e-16  7.389e-02     0.0        1    
+  
+  YEARBASED<- transform(YEARBASED, AfterAndFar = (YEARBASED$Ddummy * YEARBASED$After84 + YEARBASED$After84))
+  
+  ReformatedDist <- lm(YEARBASED$Ddummy ~ YEARBASED$AfterAndHigh)
+  
+ #                 Estimate Std. Error t value Pr(>|t|)    
+ #  (Intercept)        6.207e-01  3.694e-02    16.8   <2e-16 ***
+#    YEARBASED$After84 -2.188e-16  7.389e-02     0.0        1    
+  
+  
