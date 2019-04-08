@@ -1,0 +1,233 @@
+Year,County,Income,Distance ,Ddummy
+1959,"Alameda County, CA","9,159",40,1
+1959,"Alpine County, CA","5,721",198,1
+1959,"Amador County, CA","6,879",119,1
+1959,"Butte County, CA","7,185",116,1
+1959,"Calaveras County, CA","7,562",115,1
+1959,"Colusa County, CA","7,860",150,1
+1959,"Contra Costa County, CA","9,041",53,1
+1959,"Del Norte County, CA","7,738",421,0
+1959,"El Dorado County, CA","9,002",198,1
+1959,"Fresno County, CA","7,071",198,1
+1959,"Glenn County, CA","6,745",189,1
+1959,"Humboldt County, CA","8,048",340,0
+1959,"Imperial County, CA","6,369",551,0
+1959,"Inyo County, CA","7,436",435,0
+1959,"Kern County, CA","7,334",265,0
+1959,"Kings County, CA","6,086",180,1
+1959,"Lake County, CA","7,389",180,1
+1959,"Lassen County, CA","7,420",341,0
+1959,"Los Angeles County, CA","9,896",351,0
+1959,"Madera County, CA","6,102",169,1
+1959,"Marin County, CA","11,062",76,1
+1959,"Mariposa County, CA","7,507",158,1
+1959,"Mendocino County, CA","6,969",209,0
+1959,"Merced County, CA","6,200",111,1
+1959,"Modoc County, CA","7,777",385,0
+1959,"Mono County, CA","10,053",309,0
+1959,"Monterey County, CA","7,805",104,1
+1959,"Napa County, CA","7,628",97,1
+1959,"Nevada County, CA","7,581",117,1
+1959,"Orange County, CA","8,896",385,0
+1959,"Placer County, CA","7,287",179,1
+1959,"Plumas County, CA","7,621",273,0
+1959,"Riverside County, CA","7,593",405,0
+1959,"Sacramento County, CA","8,849",113,1
+1959,"San Benito County, CA","6,965",95,1
+1959,"San Bernardino County, CA","7,303",356,0
+1959,"San Diego County, CA","8,594",469,0
+1959,"San Francisco County, CA","10,634",39,1
+1959,"San Joaquin County, CA","7,279",78,1
+1959,"San Luis Obispo County, CA","7,330",201,1
+1959,"San Mateo County, CA","11,195",39,1
+1959,"Santa Barbara County, CA","9,382",289,0
+1959,"Santa Clara County, CA","9,143",11,1
+1959,"Santa Cruz County, CA","7,903",33,1
+1959,"Shasta County, CA","7,648",283,0
+1959,"Sierra County, CA","7,334",238,0
+1959,"Siskiyou County, CA","7,440",348,0
+1959,"Solano County, CA","7,526",89,1
+1959,"Sonoma County, CA","7,405",130,1
+1959,"Stanislaus County, CA","6,655",88,1
+1959,"Sutter County, CA","7,440",139,1
+1959,"Tehama County, CA","6,910",213,0
+1959,"Trinity County, CA","7,895",298,0
+1959,"Tulare County, CA","6,310",238,0
+1959,"Tuolumne County, CA","7,770",158,1
+1959,"Ventura County, CA","7,793",158,1
+1959,"Yolo County, CA","7,672",117,1
+1959,"Yuba County, CA","6,459",169,1
+1969,"Alameda County, CA","11,651",40,1
+1969,"Alpine County, CA","10,295",198,1
+1969,"Amador County, CA","9,486",119,1
+1969,"Butte County, CA","8,699",116,1
+1969,"Calaveras County, CA","9,684",115,1
+1969,"Colusa County, CA","10,115",150,1
+1969,"Contra Costa County, CA","12,479",53,1
+1969,"Del Norte County, CA","8,891",421,0
+1969,"El Dorado County, CA","10,266",198,1
+1969,"Fresno County, CA","8,683",198,1
+1969,"Glenn County, CA","8,756",189,1
+1969,"Humboldt County, CA","9,476",340,0
+1969,"Imperial County, CA","7,739",551,0
+1969,"Inyo County, CA","10,814",435,0
+1969,"Kern County, CA","8,875",265,0
+1969,"Kings County, CA","7,396",180,1
+1969,"Lake County, CA","8,724",180,1
+1969,"Lassen County, CA","9,130",341,0
+1969,"Los Angeles County, CA","12,161",351,0
+1969,"Madera County, CA","7,736",169,1
+1969,"Marin County, CA","15,088",76,1
+1969,"Mariposa County, CA","8,872",158,1
+1969,"Mendocino County, CA","9,139",209,0
+1969,"Merced County, CA","7,862",111,1
+1969,"Modoc County, CA","9,023",385,0
+1969,"Mono County, CA","10,439",309,0
+1969,"Monterey County, CA","9,873",104,1
+1969,"Napa County, CA","10,298",97,1
+1969,"Nevada County, CA","9,542",117,1
+1969,"Orange County, CA","12,186",385,0
+1969,"Placer County, CA","9,892",179,1
+1969,"Plumas County, CA","10,512",273,0
+1969,"Riverside County, CA","9,703",405,0
+1969,"Sacramento County, CA","10,672",113,1
+1969,"San Benito County, CA","8,756",95,1
+1969,"San Bernardino County, CA","9,448",356,0
+1969,"San Diego County, CA","10,641",469,0
+1969,"San Francisco County, CA","13,319",39,1
+1969,"San Joaquin County, CA","9,624",78,1
+1969,"San Luis Obispo County, CA","9,017",201,1
+1969,"San Mateo County, CA","14,332",39,1
+1969,"Santa Barbara County, CA","10,565",289,0
+1969,"Santa Clara County, CA","12,095",11,1
+1969,"Santa Cruz County, CA","10,011",33,1
+1969,"Shasta County, CA","9,281",283,0
+1969,"Sierra County, CA","10,332",238,0
+1969,"Siskiyou County, CA","9,221",348,0
+1969,"Solano County, CA","9,728",89,1
+1969,"Sonoma County, CA","9,684",130,1
+1969,"Stanislaus County, CA","9,190",88,1
+1969,"Sutter County, CA","9,602",139,1
+1969,"Tehama County, CA","8,910",213,0
+1969,"Trinity County, CA","8,982",298,0
+1969,"Tulare County, CA","7,840",238,0
+1969,"Tuolumne County, CA","9,558",158,1
+1969,"Ventura County, CA","10,216",158,1
+1969,"Yolo County, CA","9,410",117,1
+1969,"Yuba County, CA","7,456",169,1
+1979,"Alameda County, CA","14,305",40,1
+1979,"Alpine County, CA","12,851",198,1
+1979,"Amador County, CA","11,710",119,1
+1979,"Butte County, CA","11,240",116,1
+1979,"Calaveras County, CA","11,984",115,1
+1979,"Colusa County, CA","12,199",150,1
+1979,"Contra Costa County, CA","16,457",53,1
+1979,"Del Norte County, CA","10,535",421,0
+1979,"El Dorado County, CA","13,352",198,1
+1979,"Fresno County, CA","11,674",198,1
+1979,"Glenn County, CA","10,949",189,1
+1979,"Humboldt County, CA","11,545",340,0
+1979,"Imperial County, CA","9,677",551,0
+1979,"Inyo County, CA","11,708",435,0
+1979,"Kern County, CA","11,713",265,0
+1979,"Kings County, CA","9,791",180,1
+1979,"Lake County, CA","10,543",180,1
+1979,"Lassen County, CA","10,734",341,0
+1979,"Los Angeles County, CA","13,913",351,0
+1979,"Madera County, CA","10,659",169,1
+1979,"Marin County, CA","20,664",76,1
+1979,"Mariposa County, CA","11,187",158,1
+1979,"Mendocino County, CA","11,410",209,0
+1979,"Merced County, CA","10,501",111,1
+1979,"Modoc County, CA","10,997",385,0
+1979,"Mono County, CA","14,394",309,0
+1979,"Monterey County, CA","12,559",104,1
+1979,"Napa County, CA","14,035",97,1
+1979,"Nevada County, CA","12,541",117,1
+1979,"Orange County, CA","16,031",385,0
+1979,"Placer County, CA","13,685",179,1
+1979,"Plumas County, CA","11,490",273,0
+1979,"Riverside County, CA","12,529",405,0
+1979,"Sacramento County, CA","13,322",113,1
+1979,"San Benito County, CA","10,403",95,1
+1979,"San Bernardino County, CA","11,881",356,0
+1979,"San Diego County, CA","13,338",469,0
+1979,"San Francisco County, CA","15,525",39,1
+1979,"San Joaquin County, CA","11,757",78,1
+1979,"San Luis Obispo County, CA","11,810",201,1
+1979,"San Mateo County, CA","17,873",39,1
+1979,"Santa Barbara County, CA","14,076",289,0
+1979,"Santa Clara County, CA","15,949",11,1
+1979,"Santa Cruz County, CA","13,736",33,1
+1979,"Shasta County, CA","11,380",283,0
+1979,"Sierra County, CA","11,931",238,0
+1979,"Siskiyou County, CA","10,951",348,0
+1979,"Solano County, CA","12,412",89,1
+1979,"Sonoma County, CA","13,551",130,1
+1979,"Stanislaus County, CA","11,887",88,1
+1979,"Sutter County, CA","11,911",139,1
+1979,"Tehama County, CA","10,284",213,0
+1979,"Trinity County, CA","10,548",298,0
+1979,"Tulare County, CA","10,118",238,0
+1979,"Tuolumne County, CA","11,302",158,1
+1979,"Ventura County, CA","13,431",158,1
+1979,"Yolo County, CA","12,194",117,1
+1979,"Yuba County, CA","9,282",169,1
+1989,"Alameda County, CA","17,547",40,1
+1989,"Alpine County, CA","13,799",198,1
+1989,"Amador County, CA","14,282",119,1
+1989,"Butte County, CA","12,083",116,1
+1989,"Calaveras County, CA","13,497",115,1
+1989,"Colusa County, CA","12,402",150,1
+1989,"Contra Costa County, CA","20,748",53,1
+1989,"Del Norte County, CA","10,625",421,0
+1989,"El Dorado County, CA","15,703",198,1
+1989,"Fresno County, CA","11,824",198,1
+1989,"Glenn County, CA","10,677",189,1
+1989,"Humboldt County, CA","12,436",340,0
+1989,"Imperial County, CA","9,208",551,0
+1989,"Inyo County, CA","13,397",435,0
+1989,"Kern County, CA","12,154",265,0
+1989,"Kings County, CA","10,035",180,1
+1989,"Lake County, CA","11,705",180,1
+1989,"Lassen County, CA","12,626",341,0
+1989,"Los Angeles County, CA","16,149",351,0
+1989,"Madera County, CA","10,856",169,1
+1989,"Marin County, CA","28,381",76,1
+1989,"Mariposa County, CA","13,074",158,1
+1989,"Mendocino County, CA","12,776",209,0
+1989,"Merced County, CA","10,606",111,1
+1989,"Modoc County, CA","10,971",385,0
+1989,"Mono County, CA","16,120",309,0
+1989,"Monterey County, CA","14,578",104,1
+1989,"Napa County, CA","17,640",97,1
+1989,"Nevada County, CA","15,760",117,1
+1989,"Orange County, CA","19,890",385,0
+1989,"Placer County, CA","17,311",179,1
+1989,"Plumas County, CA","12,952",273,0
+1989,"Riverside County, CA","14,510",405,0
+1989,"Sacramento County, CA","15,265",113,1
+1989,"San Benito County, CA","13,933",95,1
+1989,"San Bernardino County, CA","13,358",356,0
+1989,"San Diego County, CA","16,220",469,0
+1989,"San Francisco County, CA","19,695",39,1
+1989,"San Joaquin County, CA","12,705",78,1
+1989,"San Luis Obispo County, CA","15,237",201,1
+1989,"San Mateo County, CA","22,430",39,1
+1989,"Santa Barbara County, CA","17,155",289,0
+1989,"Santa Clara County, CA","20,423",11,1
+1989,"Santa Cruz County, CA","17,347",33,1
+1989,"Shasta County, CA","12,381",283,0
+1989,"Sierra County, CA","13,731",238,0
+1989,"Siskiyou County, CA","11,610",348,0
+1989,"Solano County, CA","14,833",89,1
+1989,"Sonoma County, CA","17,239",130,1
+1989,"Stanislaus County, CA","12,731",88,1
+1989,"Sutter County, CA","12,763",139,1
+1989,"Tehama County, CA","10,990",213,0
+1989,"Trinity County, CA","10,781",298,0
+1989,"Tulare County, CA","10,302",238,0
+1989,"Tuolumne County, CA","13,224",158,1
+1989,"Ventura County, CA","17,861",158,1
+1989,"Yolo County, CA","13,861",117,1
+1989,"Yuba County, CA","9,874",169,1
