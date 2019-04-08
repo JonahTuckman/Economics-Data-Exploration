@@ -66,6 +66,16 @@ write.csv(CaliHighIncome, "CaliHighTech2.csv")
 ### Opened in text file, deleted commas, reopened in numbers and saved as CaliHighTech2.csv
 
 
+
+
+############### Acount for Inflation here
+############### We will use 1959 dollars in this study.
+
+## According to the Bureau of Labor Statistics consumer price index, prices in 1969 are 26.12% higher than average prices throughout 1959.
+
+CaliHighIncome$X1969 / .2612
+
+
 CaliHighIncome$X <- NULL ## Adds X column of index from original list. Not needed
 CaliHighIncome$State.and.County <- NULL ## No names (categorical variables suck to deal with)
 summary(CaliHighIncome) # Checking out data
@@ -123,14 +133,19 @@ table89
 
 
 # Data to be used for plotting. Year vs Average in High vs Low Income
-avgHigh <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageHighIncome59, averageHighIncome69, averageHighIncome79, averageHighIncome89))
-avgLow <- data.frame("Year" = c(1959, 1969, 1979, 1989), "Average GDP Per Capita" = c(averageLowIncome59, averageLowIncome69, averageLowIncome79, averageLowIncome89))
+avgHigh <- data.frame("Year" = c(1959, 1969, 1979, 1989), 
+                      "Average GDP Per Capita" = c(averageHighIncome59, averageHighIncome69,
+                                                   averageHighIncome79, averageHighIncome89))
+avgLow <- data.frame("Year" = c(1959, 1969, 1979, 1989), 
+                     "Average GDP Per Capita" = c(averageLowIncome59, averageLowIncome69, 
+                                                  averageLowIncome79, averageLowIncome89))
 
 ##### Plotting High Income
 XHigh <- avgHigh$Year
 YHigh <- log(avgHigh$Average.GDP.Per.Capita)
 
-plotAvgHigh <- ggplot(data = avgHigh, mapping = aes(x = XHigh,y = YHigh)) + geom_point() + geom_smooth(colour="darkred", size = 1)
+plotAvgHigh <- ggplot(data = avgHigh, mapping = aes(x = XHigh,y = YHigh)) + geom_point() + 
+  geom_smooth(colour="darkred", size = 1)
 plotAvgHigh + ggtitle("Average High Income") + xlab("Year") + ylab("Income Per Capita")
 
 ##### Plotting Low Income
@@ -168,7 +183,7 @@ combined <- ggplot() +
   geom_point(data=Combined, aes(x = Year, y = Low)) + 
   geom_smooth(data=Combined, aes(x=Year, y = Low), fill = "blue",
               colour = "darkblue", size = 1) +
-  ggtitle("*PRELIMINARY FINDINGS* Combined Income Change") + xlab("Year") + ylab("% Change in Income per Capita") 
+  ggtitle("Combined Income Change") + xlab("Year") + ylab("% Change in Income per Capita") 
   # + geom_vline(xintercept=1980) + geom_vline(xintercept = 1970)
 combined
 
@@ -180,15 +195,18 @@ dev.off()
 
 Combined$HighxLow <- Combined$High*Combined$Low
 
-nonLogHigh <- lm(log(HighxLow) ~ log(High), data = Combined)
+# 2)Y=a+β1*(Income Group)+β2*(Mac Introduction)+β3*(Income Group*Mac Introduction)+e
+summary(Combined)
+summary(CaliData)
+
+nonLogHigh <- lm(log(High) + log(Combined$Year) + log(CaliData$X1989), data = Combined)
 summary(nonLogHigh)
 
 # Estimate Std. Error t value Pr(>|t|)
 # (Intercept)   -1.672      1.296  -1.291    0.420
 # log(High)      3.990      1.572   2.539    0.239
 
-
-nonLogLow <- lm(log(HighxLow) ~ log(Low), data = Combined)
+nonLogLow <- lm(log(Combined$Low) + log(Combined$Year) + log(CaliData$X1989), data = Combined)
 summary(nonLogLow)
 
 # Estimate Std. Error t value Pr(>|t|)  
