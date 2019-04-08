@@ -11,6 +11,8 @@ install.packages("ggpubr")
 library("ggpubr")
 library("ggplot2")
 library("dplyr")
+install.packages("statar")
+library("statar")
 
 setwd('/Users/JonahTuckman/Desktop/Economics/Economics-Data-Exploration/GroupProject/')
 
@@ -197,18 +199,21 @@ Combined$HighxLow <- Combined$High*Combined$Low
 
 # 2)Y=a+β1*(Income Group)+β2*(Mac Introduction)+β3*(Income Group*Mac Introduction)+e
 summary(Combined)
+CaliData$X1989 <- replaceCommas(CaliData$X1989)
+CaliData$X1979 <- replaceCommas(CaliData$X1979)
+
+CaliData <- transform(CaliData, HighBool = ifelse(match(CaliData$X1989, CaliHighIncome$X1989, nomatch = 0), 1, 0))
+CaliData <- transform(CaliData, Grow = ifelse(CaliData$X1989 > CaliData$X1979, 1, 0))
+CaliData <- transform(CaliData, Post89 = CaliData$X1989)
 summary(CaliData)
 
-nonLogHigh <- lm(log(High) + log(Combined$Year) + log(CaliData$X1989), data = Combined)
-summary(nonLogHigh)
+formula <- 
 
-# Estimate Std. Error t value Pr(>|t|)
-# (Intercept)   -1.672      1.296  -1.291    0.420
-# log(High)      3.990      1.572   2.539    0.239
+# nonLogHigh <- lm(log(CaliData$HighBool) + log(CaliData$X1989) + log(CaliData$X1989 * CaliData$HighBool) , data = CaliData)
+  nonLogHigh <- lm(CaliData$Grow ~ CaliData$HighBool, data = CaliData)
+  summary(nonLogHigh)
 
-nonLogLow <- lm(log(Combined$Low) + log(Combined$Year) + log(CaliData$X1989), data = Combined)
-summary(nonLogLow)
+# Estimate Std. Error t value Pr(>|t|)    
+# (Intercept)        0.93478    0.03299  28.331   <2e-16 ***
+# CaliData$HighBool  0.06522    0.07254   0.899    0.372   
 
-# Estimate Std. Error t value Pr(>|t|)  
-# (Intercept)   0.6166     0.1092   5.645   0.1116  
-# log(Low)      1.2620     0.1377   9.163   0.0692 .
