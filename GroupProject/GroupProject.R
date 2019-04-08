@@ -207,7 +207,12 @@ CaliData <- transform(CaliData, Grow = ifelse(CaliData$X1989 > CaliData$X1979, 1
 CaliData <- transform(CaliData, Post89 = CaliData$X1989)
 summary(CaliData)
 
-formula <- 
+
+YEARBASED$Income <- replaceCommas(YEARBASED$Income)
+
+mean(YEARBASED$Income)
+YEARBASED <- read.csv("YearBasedData.csv")
+YEARBASED <- transform(YEARBASED, High = ifelse(YEARBASED$Income > 11098.78, 1,0))
 
 # nonLogHigh <- lm(log(CaliData$HighBool) + log(CaliData$X1989) + log(CaliData$X1989 * CaliData$HighBool) , data = CaliData)
   nonLogHigh <- lm(CaliData$Grow ~ CaliData$HighBool, data = CaliData)
